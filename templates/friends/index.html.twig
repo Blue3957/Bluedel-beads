@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Friends!{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row">
+			{% for friend in friends %}
+				<div class="col-3">
+					<div class="card" style="height:100%">
+						<div class="card-header" style="padding:0">
+							<img src="{{ friend.image }}" alt="image" style="width:100%;height:100%" class="rounded">
+						</div>
+						<div class="card-body">
+							<div class="card-title"><h1>{{ friend.name }}</h1></div>
+							<div class="card-text"><p>{{ friend.text }}</p></div>
+							<a href="/friends/{{ friend.id }}" class="btn btn-primary">More...</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

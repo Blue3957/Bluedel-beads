@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Friend!{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-3">
+				<div class="card" style="height:100%">
+					<div class="card-header" style="padding:0">
+						<img src="{{ friend.image }}" alt="image" style="width:100%;height:100%" class="rounded">
+					</div>
+					<div class="card-body">
+						<div class="card-title"><h1>{{ friend.name }}</h1></div>
+						<div class="card-text"><p>{{ friend.text }}</p></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
