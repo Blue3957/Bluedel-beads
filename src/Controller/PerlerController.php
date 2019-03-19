@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\PaletteRepository;
+use App\Repository\PerlerBrandsRepository;
 use App\Entity\Palette;
 use App\Utils\PaletteConverter;
 use App\Form\PaletteType;
@@ -73,11 +74,27 @@ class PerlerController extends AbstractController
    	/**
    	 * @Route("/perler/pattern", name="perler_pattern")
    	 */
-   	public function Pattern(PaletteRepository $paletteRepo)
+   	public function Pattern(PaletteRepository $paletteRepo, PerlerBrandsRepository $brandsRepo)
    	{
    		$palette = $paletteRepo->findAll()[0];
+   		$brands = $brandsRepo->findAll();
+
+   		for($i = 0 ; $i < count($brands) ; $i++)
+   		{
+   			$present = false;
+   			foreach($palette->getColors() as $color)
+   			{
+   				if($color->getBrand() == $brands[$i]) $present = true;
+   			}
+   			if(!$present)
+   			{
+   				array_splice($brands, $i, 1);
+   			}
+   		}
+
    		return $this->render("perler/pattern.html.twig", [
-   			'palette' => $palette
+   			'palette' => $palette,
+   			'brands' => $brands
    		]);
    	}
 }
