@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PerlerPaletteController!{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center">Palette</h1>
+		<div class="d-flex justify-content-center row">
+			{% for color in palette.colors %}
+				<div style="height:30px; width:30px; background-color: #{{ color.hex }}; border: 1px solid black" onclick="changeCurrentColor('#{{ color.hex }}')"></div>
+			{% endfor %}
+		</div>
+		<h1 class="text-center">Current color</h1>
+		<div class="d-flex justify-content-center row">
+			<div class="currentColor" style="height:50px; width:50px; background-color:#000000; border: 1px solid black;"></div>
+		</div>
+		<h1 class="text-center">Grid</h1>
+		<div style="margin-top:20px;">
+			{% for i in 1..32 %}
+				<div class="d-flex justify-content-center row x{{i}}">
+					{% for j in 1..32 %}
+						<div class="square x{{i}} y{{j}}" style="height:30px;width:30px;border:1px solid grey;" onclick="changeColor({{i}}, {{j}})"></div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset("js/pattern.js") }}"></script>
+{% endblock %}
