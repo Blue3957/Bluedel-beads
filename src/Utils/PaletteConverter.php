@@ -33,9 +33,12 @@ class PaletteConverter
     	$colors = "";
     	foreach ($colorList as $color) {
     		$rgb = $this->HexToRgb($color->getHex());
-    		$row = join(" ", $rgb) .
-    			   "	" . $color->getName() . "\r\n";
-    		$colors .= $row;
+            if($rgb !== false)
+            {
+        		$row = join(" ", $rgb) .
+        			   "	" . $color->getName() . "\r\n";
+        		$colors .= $row;
+            }
     	}
     	$output = $header . $comment . $colors;
     	dump($output);
