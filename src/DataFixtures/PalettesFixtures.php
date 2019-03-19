@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\PerlerColors;
+use App\Entity\PerlerBrands;
 use App\Entity\Palette;
 
 
@@ -12,23 +13,41 @@ class PalettesFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+    	$brands = [
+    		"Perler",
+    		"Hama",
+    		"Ikea",
+    		"Various"];
+
+    	for($i = 0, $a = count($brands) ; $i < $a ; $i++)
+    	{
+    		$brand = new PerlerBrands();
+
+    		$brand->setName($brands[$i]);
+
+    		$manager->persist($brand);
+    	}
+    	$manager->flush();
+
+    	$brandList = $manager->getRepository("App\Entity\PerlerBrands")->findAll();
+
         $colors = [
 			["WHITE", "FFFFFF"],
-			["SILVER", "C0C0C0"],
-			["GRAY", "808080"],
-			["BLACK", "000000"],
-			["RED",	 "FF0000"],
-			["MAROON", "800000"],
-			["YELLOW", "FFFF00"],
-			["OLIVE", "808000"],
-			["LIME", "00FF00"],
-			["GREEN", "008000"],
-			["AQUA", "00FFFF"],
-			["TEAL", "008080"],
-			["BLUE", "0000FF"],
-			["NAVY", "000080"],
-			["FUCHSIA", "FF00FF"],
-			["PURPLE", "800080"],
+            ["SILVER", "C0C0C0"],
+            ["GRAY", "808080"],
+            ["BLACK", "000000"],
+            ["RED",  "FF0000"],
+            ["MAROON", "800000"],
+            ["YELLOW", "FFFF00"],
+            ["OLIVE", "808000"],
+            ["LIME", "00FF00"],
+            ["GREEN", "008000"],
+            ["AQUA", "00FFFF"],
+            ["TEAL", "008080"],
+            ["BLUE", "0000FF"],
+            ["NAVY", "000080"],
+            ["FUCHSIA", "FF00FF"],
+            ["PURPLE", "800080"]
 		];
 
 		for($i = 0, $a = count($colors) ; $i < $a ; $i++)
@@ -36,7 +55,9 @@ class PalettesFixtures extends Fixture
 			$color = new PerlerColors();
 
 			$color->setName($colors[$i][0])
-				  ->setHex($colors[$i][1]);
+				  ->setHex($colors[$i][1])
+				  ->setBrand($brandList[random_int(0, count($brandList)-1)])
+				  ;
 
 			$manager->persist($color);
 		}

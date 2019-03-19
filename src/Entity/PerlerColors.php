@@ -33,6 +33,11 @@ class PerlerColors
      */
     private $palettes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PerlerBrands", inversedBy="perlerColors")
+     */
+    private $brand;
+
     public function __construct()
     {
         $this->palettes = new ArrayCollection();
@@ -91,6 +96,18 @@ class PerlerColors
             $this->palettes->removeElement($palette);
             $palette->removeColor($this);
         }
+
+        return $this;
+    }
+
+    public function getBrand(): ?PerlerBrands
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?PerlerBrands $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }
