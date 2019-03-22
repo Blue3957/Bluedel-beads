@@ -24,11 +24,13 @@ class PaletteConverter
     public function RgbToHex($rgb)
     {
         if(strlen($rgb) !== 11) return false;
-        $hex = "#";
-        $hex .= base_convert(substr($rgb, 0, 3), 10, 16);
-        $hex .= base_convert(substr($rgb, 4, 3), 10, 16);
-        $hex .= base_convert(substr($rgb, 8, 3), 10, 16);
-        return $hex;
+        $hex1 = "" . base_convert(substr($rgb, 0, 3), 10, 16);
+        if(strlen($hex1) < 2) $hex1 = "0" . $hex1;
+        $hex2 = "" . base_convert(substr($rgb, 4, 3), 10, 16);
+        if(strlen($hex2) < 2) $hex2 = "0" . $hex2;
+        $hex3 = "" . base_convert(substr($rgb, 8, 3), 10, 16);
+        if(strlen($hex3) < 2) $hex3 = "0" . $hex3;
+        return $hex1 . $hex2 . $hex3;
     }
 
     public function paletteToGpl()

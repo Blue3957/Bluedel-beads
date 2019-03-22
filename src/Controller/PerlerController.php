@@ -76,7 +76,7 @@ class PerlerController extends AbstractController
    	 */
    	public function Pattern(PaletteRepository $paletteRepo, PerlerBrandsRepository $brandsRepo)
    	{
-   		$palette = $paletteRepo->findAll()[0];
+   		$palette = $paletteRepo->findOneByName('Hama');
    		$brands = $brandsRepo->findAll();
 
    		for($i = 0 ; $i < count($brands) ; $i++)
