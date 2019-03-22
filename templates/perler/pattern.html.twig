@@ -7,46 +7,54 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container-fluid editor">
+		<div class="row">
+			<div class="col-12 col-lg-8">
+				<h1 class="text-center">Grid</h1>
+				<div style="margin-top:20px;">
 
-		<h1 class="text-center">Palette</h1>
-			<div class="row palettes">
-				{% for brand in brands %}
-					<div class="col-{{ 12/(brands|length) }}">
-						<h3 class="text-center">{{ brand.name }}</h3>
-						<div class="d-flex flex-wrap row">
-						{% for color in palette.colors %}
-							{% if color.brand == brand %}
-								<div title="{{ color.name }}" style="height:30px; width:30px; background-color: #{{ color.hex }}; border: 1px solid black" onclick="changeCurrentColor('#{{ color.hex }}')"></div>
-							{% endif %}
-						{% endfor %}
+					{% for i in 1..32 %}
+						<div class="row d-flex justify-content-center">
+
+							{% for j in 1..32 %}
+								<div class="square x{{i}} y{{j}}" style="height:25px; width:25px; border:1px solid grey; background-color:#FFFFFF" onclick="changeColor({{i}}, {{j}})"></div>
+							{% endfor %}
+
 						</div>
-					</div>
-				{% endfor %}
-			</div>
-
-		<h1 class="text-center">Current color</h1>
-		<div class="d-flex justify-content-center row">
-			<div class="currentColor" style="height:50px; width:50px; background-color:#000000; border: 1px solid black;"></div>
-		</div>
-
-		<h1 class="text-center">Grid</h1>
-		<div style="margin-top:20px;">
-
-			{% for i in 1..32 %}
-
-				<div class="d-flex justify-content-center row x{{i}}">
-
-					{% for j in 1..32 %}
-						<div class="square x{{i}} y{{j}}" style="height:25px; width:25px; border:1px solid grey; background-color:#FFFFFF" onclick="changeColor({{i}}, {{j}})"></div>
 					{% endfor %}
 
 				</div>
+			</div>
 
-			{% endfor %}
+			<div class="col-12 col-lg-4">
+				<h1 class="text-center">Palette</h1>
+					<div class="row palettes">
 
+						{% for brand in brands %}
+							<div class="col-{{ 24/(brands|length) }}">
+								<h3 class="text-center">{{ brand.name }}</h3>
+								<div class="d-flex flex-wrap row">
+
+								{% for color in palette.colors %}
+
+									{% if color.brand == brand %}
+										<div title="{{ color.name }}" style="height:30px; width:30px; background-color: #{{ color.hex }}; border: 1px solid black" onclick="changeCurrentColor('#{{ color.hex }}')"></div>
+									{% endif %}
+
+								{% endfor %}
+
+								</div>
+							</div>
+						{% endfor %}
+
+					</div>
+
+				<h1 class="text-center">Current color</h1>
+				<div class="d-flex justify-content-center row">
+					<div class="currentColor" style="height:50px; width:50px; background-color:#000000; border: 1px solid black;"></div>
+				</div>
+			</div>
 		</div>
-
 	</div>
 {% endblock %}
 

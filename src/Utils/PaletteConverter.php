@@ -6,7 +6,7 @@ class PaletteConverter
 {
 	private $palette;
 
-	public function __construct($palette)
+	public function __construct($palette = null)
 	{
 		$this->palette = $palette;
 	}
@@ -19,6 +19,16 @@ class PaletteConverter
     	$rgb[1] = base_convert(substr($hex, 2, 2), 16, 10);
     	$rgb[2] = base_convert(substr($hex, 4, 2), 16, 10);
     	return $rgb;
+    }
+
+    public function RgbToHex($rgb)
+    {
+        if(strlen($rgb) !== 11) return false;
+        $hex = "#";
+        $hex .= base_convert(substr($rgb, 0, 3), 10, 16);
+        $hex .= base_convert(substr($rgb, 4, 3), 10, 16);
+        $hex .= base_convert(substr($rgb, 8, 3), 10, 16);
+        return $hex;
     }
 
     public function paletteToGpl()

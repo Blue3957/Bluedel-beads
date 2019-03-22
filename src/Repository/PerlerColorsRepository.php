@@ -19,22 +19,19 @@ class PerlerColorsRepository extends ServiceEntityRepository
         parent::__construct($registry, PerlerColors::class);
     }
 
-    // /**
-    //  * @return PerlerColors[] Returns an array of PerlerColors objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+    * @return PerlerColors[] Returns an array of PerlerColors objects
+    */
+    public function findByBrand($value)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere('p.brand = :val')
             ->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?PerlerColors
