@@ -11,13 +11,21 @@
 		<div class="row">
 			<div class="col-12 col-lg-8">
 				<h1 class="text-center">Grid</h1>
-				<div style="margin-top:20px;">
-
+				<div class="grid container" style="margin-top:20px; width:800px; padding:0;" onDragStart="return false" onSelect="return false">
+					<img src="https://picsum.photos/800/?random" alt="background-image" style="position:absolute; height: 800px; width: 800px">
 					{% for i in 1..32 %}
 						<div class="row d-flex justify-content-center">
 
 							{% for j in 1..32 %}
-								<div class="square x{{i}} y{{j}}" style="height:25px; width:25px; border:1px solid grey; background-color:#FFFFFF" onclick="changeColor({{i}}, {{j}})"></div>
+
+								<div class="square x{{i}} y{{j}}"
+									 style="z-index:1; height:25px; width:25px; border:1px solid grey; background-color:#FFFFFF00"
+									 onclick="changeColor({{i}}, {{j}})"
+									 onmousedown="beginLine({{i}}, {{j}})"
+									 onmouseup="endLine({{i}}, {{j}})"
+								>
+								</div>
+
 							{% endfor %}
 
 						</div>
@@ -49,9 +57,16 @@
 
 					</div>
 
+				<h1 class=text-center>Tools</h1>
+				<div class="d-flex justify-content-center row">
+					<button class="btn btn-primary" onclick="changeCurrentColor('#FFFFFF00')">Eraser</button>
+				</div>
+
+
 				<h1 class="text-center">Current color</h1>
 				<div class="d-flex justify-content-center row">
-					<div class="currentColor" style="height:50px; width:50px; background-color:#000000; border: 1px solid black;"></div>
+					<img src="{{ asset("resources/transparent.png") }}" alt="background-image" style="height: 50px; width; 50px; position:absolute;">
+					<div class="currentColor" style="z-index: 1; height:50px; width:50px; background-color:#000000; border: 1px solid black;"></div>
 				</div>
 			</div>
 		</div>
