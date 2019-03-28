@@ -16,8 +16,19 @@ function changeCurrentColor(color){
 lineTool = false;
 
 function toggleLineTool(){
-	if(lineTool === true) lineTool = false;
-	else lineTool = true;
+	button = document.querySelector('#lineButton');
+	if(lineTool === true){
+		lineTool = false;
+		console.log('deactivating!')
+		button.classList.remove('btn-primary');
+		button.classList.add('btn-outline-primary');
+	}
+	else{
+		lineTool = true;
+		console.log('activating!')
+		button.classList.remove('btn-outline-primary');
+		button.classList.add('btn-primary');
+	}
 }
 
 lineStart = [];
