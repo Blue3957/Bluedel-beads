@@ -15,8 +15,10 @@ function changeCurrentColor(color){
 
 lineTool = false;
 
-function useLineTool(){ lineTool = true; }
-function stopLineTool(){ lineTool = false; }
+function toggleLineTool(){
+	if(lineTool === true) lineTool = false;
+	else lineTool = true;
+}
 
 lineStart = [];
 
@@ -45,4 +47,16 @@ function endLine(x, y){
 	}
 	lineStart = [];
 	console.log(lineStart);
+}
+
+function changeOpacity(layer, value){
+	if(layer === 'background'){
+		document.querySelector('#image').style.opacity = value * 0.01;
+	}
+	else if(layer === 'foreground'){
+		var squares = document.querySelectorAll('.square')
+		squares.forEach( function(square, index) {
+			square.style.opacity = value * 0.01;
+		});
+	}
 }

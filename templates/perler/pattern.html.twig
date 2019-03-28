@@ -9,17 +9,17 @@
 {% block body %}
 	<div class="container-fluid editor">
 		<div class="row">
-			<div class="col-12 col-lg-8">
+			<div class="col-12 col-xl-8">
 				<h1 class="text-center">Grid</h1>
 				<div class="grid container" style="margin-top:20px; width:800px; padding:0;" onDragStart="return false" onSelect="return false">
-					<img src="https://picsum.photos/800/?random" alt="background-image" style="position:absolute; height: 800px; width: 800px">
+					<img src="https://picsum.photos/800/?random" alt="background-image" style="position:absolute; height: 800px; width: 800px" id="image">
 					{% for i in 1..32 %}
 						<div class="row d-flex justify-content-center">
 
 							{% for j in 1..32 %}
 
 								<div class="square x{{i}} y{{j}}"
-									 style="z-index:1; height:25px; width:25px; border:1px solid grey; background-color:#FFFFFF00"
+									 style="z-index:1; height:25px; width:25px; border:1px solid grey; background-color:#FFFFFF00;"
 									 onclick="changeColor({{i}}, {{j}})"
 									 onmousedown="beginLine({{i}}, {{j}})"
 									 onmouseup="endLine({{i}}, {{j}})"
@@ -34,7 +34,7 @@
 				</div>
 			</div>
 
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-xl-4" id="tools">
 				<h1 class="text-center">Palette</h1>
 					<div class="row palettes">
 
@@ -60,6 +60,7 @@
 				<h1 class=text-center>Tools</h1>
 				<div class="d-flex justify-content-center row">
 					<button class="btn btn-primary" onclick="changeCurrentColor('#FFFFFF00')">Eraser</button>
+					<button class="btn btn-primary" onclick="toggleLineTool()">Line</button>
 				</div>
 
 
@@ -67,6 +68,13 @@
 				<div class="d-flex justify-content-center row">
 					<img src="{{ asset("resources/transparent.png") }}" alt="background-image" style="height: 50px; width; 50px; position:absolute;">
 					<div class="currentColor" style="z-index: 1; height:50px; width:50px; background-color:#000000; border: 1px solid black;"></div>
+				</div>
+				<h1 class="text-center">Opacity</h1>
+				<div class="d-flex justify-content-center row col-6 offset-3" id="opacity">
+					<label for="foreground">Foreground</label>
+					<input type="range" value="100" class="custom-range" id="foreground" oninput="changeOpacity('foreground', this.value)">
+					<label for="background">Background</label>
+					<input type="range" value="100" class="custom-range" id="background" oninput="changeOpacity('background', this.value)">
 				</div>
 			</div>
 		</div>

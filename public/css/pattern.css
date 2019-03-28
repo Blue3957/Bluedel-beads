@@ -5,3 +5,9 @@
 .editor{
 	padding-right: 60px;
 }
+#tools h1+div{
+	margin-bottom: 50px;
+}
+#opacity{
+	width: 50%;
+}
