@@ -8,8 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Repository\PaletteRepository;
 use App\Repository\PerlerBrandsRepository;
 use App\Entity\Palette;
+use App\Entity\PatternImage;
 use App\Utils\PaletteConverter;
 use App\Form\PaletteType;
+use App\Form\PatternImageType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -73,8 +75,9 @@ class PerlerController extends AbstractController
 
    	/**
    	 * @Route("/perler/pattern", name="perler_pattern")
+     * @Route("/perler/pattern/{id<\d+>}", name="perler_pattern_image")
    	 */
-   	public function Pattern(PaletteRepository $paletteRepo, PerlerBrandsRepository $brandsRepo)
+   	public function Pattern(PaletteRepository $paletteRepo, PerlerBrandsRepository $brandsRepo, PatternImage $image = null)
    	{
    		$palette = $paletteRepo->findOneByName('Hama');
    		$brands = $brandsRepo->findAll();
@@ -94,7 +97,37 @@ class PerlerController extends AbstractController
 
    		return $this->render("perler/pattern.html.twig", [
    			'palette' => $palette,
-   			'brands' => $brands
+   			'brands' => $brands,
+        'image' => $image
    		]);
    	}
+
+    /**
+     * @Route("/perler/upload", name="perler_upload_image")
+     */
+    public function uploadImage(ObjectManager $manager, Request $req)
+    {
+      $image = new PatternImage();
+      $form = $this->createForm(PatternImageType::class, $image);
+
+      $form->handleRequest($req);
+
+      if($form->isSubmitted()&&$form->isValid())
+      {
+        $file = $image->getName();
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+        $file->move($this->getParameter('upload_directory'), $fileName);
+        $image->setName($fileName);
+        $image->setCreatedAt(new \Datetime);
+
+        $manager->persist($image);
+        $manager->flush();
+
+        return $this->redirectToRoute('perler_pattern_image', ['id' => $image->getId()]);
+      }
+
+      return $this->render('perler/imageUpload.html.twig', [
+        'form' => $form->createView(),
+      ]);
+    }
 }

@@ -12,7 +12,7 @@
 			<div class="col-12 col-xl-8">
 				<h1 class="text-center">Grid</h1>
 				<div class="grid container" style="margin-top:20px; width:800px; padding:0;" onDragStart="return false" onSelect="return false">
-					<img src="https://picsum.photos/800/?random" alt="background-image" style="position:absolute; height: 800px; width: 800px" id="image">
+					<img src="{% if image is defined %}{{ asset('uploads/' ~ image.name) }}{% else %}https://picsum.photos/800/?random{% endif %}" alt="background-image" style="position:absolute; height: 800px; width: 800px" id="image">
 					{% for i in 1..32 %}
 						<div class="row d-flex justify-content-center">
 
