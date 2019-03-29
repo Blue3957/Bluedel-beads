@@ -27,10 +27,19 @@ class PerlerColorsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.brand = :val')
             ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.hex', 'ASC')
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findAll()
+    {
+        return $this->createQueryBuilder('p')
+                    ->orderBy('p.hex', 'ASC')
+                    ->getQuery()
+                    ->getResult()
+                ;
     }
 
     /*

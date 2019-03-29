@@ -79,21 +79,9 @@ class PerlerController extends AbstractController
    	 */
    	public function Pattern(PaletteRepository $paletteRepo, PerlerBrandsRepository $brandsRepo, PatternImage $image = null)
    	{
-   		$palette = $paletteRepo->findOneByName('Hama');
+   		$palette = $paletteRepo->findOneByName('Full Palette');
+      dump($palette);
    		$brands = $brandsRepo->findAll();
-
-   		for($i = 0 ; $i < count($brands) ; $i++)
-   		{
-   			$present = false;
-   			foreach($palette->getColors() as $color)
-   			{
-   				if($color->getBrand() == $brands[$i]) $present = true;
-   			}
-   			if(!$present)
-   			{
-   				array_splice($brands, $i, 1);
-   			}
-   		}
 
    		return $this->render("perler/pattern.html.twig", [
    			'palette' => $palette,

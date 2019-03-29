@@ -21,9 +21,7 @@ class PalettesFixtures extends Fixture
 
     	$brands = [
     		"Perler",
-    		"Hama",
-    		"Ikea",
-    		"Various"];
+    		"Hama"];
 
     	for($i = 0, $a = count($brands) ; $i < $a ; $i++)
     	{
@@ -37,24 +35,65 @@ class PalettesFixtures extends Fixture
 
     	$brandRepo = $manager->getRepository("App\Entity\PerlerBrands");
 
-        $colors = [
-			["WHITE", "FFFFFF"],
-            ["SILVER", "C0C0C0"],
-            ["GRAY", "808080"],
-            ["BLACK", "000000"],
-            ["RED",  "FF0000"],
-            ["MAROON", "800000"],
-            ["YELLOW", "FFFF00"],
-            ["OLIVE", "808000"],
-            ["LIME", "00FF00"],
-            ["GREEN", "008000"],
-            ["AQUA", "00FFFF"],
-            ["TEAL", "008080"],
-            ["BLUE", "0000FF"],
-            ["NAVY", "000080"],
-            ["FUCHSIA", "FF00FF"],
-            ["PURPLE", "800080"]
-		];
+        $perlerColors = [
+            ['241 241 241', 'White'],
+            ['224 222 169', 'Cream'],
+            ['236 216 000', 'Yellow'],
+            ['237 097 032', 'Orange'],
+            ['191 046 064', 'Red'],
+            ['221 102 155', 'Bubblegum'],
+            ['096 064 137', 'Purple'],
+            ['043 063 135', 'Dark Blue'],
+            ['051 112 192', 'Light Blue'],
+            ['028 117 062', 'Dark Green'],
+            ['249 126 121', 'Pearl Coral'],
+            ['122 174 162', 'Pearl Light Blue'],
+            ['132 183 145', 'Pearl Green'],
+            ['202 192 051', 'Pearl Yellow'],
+            ['215 168 162', 'Pearl Light Pink'],
+            ['119 123 129', 'Silver'],
+            ['086 186 159', 'Light Green'],
+            ['081 057 049', 'Brown'],
+            ['138 141 145', 'Grey'],
+            ['046 047 050', 'Black'],
+            ['140 055 044', 'Rust'],
+            ['129 093 052', 'Light Brown'],
+            ['238 186 178', 'Peach'],
+            ['188 147 113', 'Tan'],
+            ['242 042 123', 'Magenta'],
+            ['220 224 002', 'Neon Yellow'],
+            ['255 119 000', 'Neon Orange'],
+            ['001 158 067', 'Neon Green'],
+            ['255 057 145', 'Neon Pink'],
+            ['083 144 209', 'Pastel Blue'],
+            ['118 200 130', 'Pastel Green'],
+            ['138 114 193', 'Pastel Lavender'],
+            ['254 248 117', 'Pastel Yellow'],
+            ['241 170 012', 'Chedder'],
+            ['147 200 212', 'Toothpaste'],
+            ['255 056 081', 'Hot Coral'],
+            ['162 075 156', 'Plum'],
+            ['108 190 019', 'Kiwi Lime'],
+            ['043 137 198', 'Cyan (aka Turquoise)'],
+            ['255 130 133', 'Blush'],
+            ['100 124 190', 'Periwinkle Blue'],
+            ['190 198 150', 'Glow Green'],
+            ['246 179 221', 'Light Pink'],
+            ['079 173 066', 'Bright Green'],
+            ['177 181 178', 'Light Gray'],
+            ['053 083 067', 'Evergreen'],
+            ['173 152 212', 'Lavender'],
+            ['228 072 146', 'Pink'],
+            ['187 118 052', 'Gold'],
+            ['165 048 097', 'Raspberry'],
+            ['212 132 055', 'Butterscotch'],
+            ['006 124 129', 'Parrot Green'],
+            ['077 081 086', 'Dark Grey'],
+            ['130 151 217', 'Blueberry Cream'],
+            ['128 050 069', 'Cranapple'],
+            ['189 218 001', 'Prickly Pear'],
+            ['228 182 144', 'Sand']
+        ];
 
         $hamaColors = [
             ["236 237 237",  "White",],
@@ -105,18 +144,18 @@ class PalettesFixtures extends Fixture
             ["073 152 188",  "Azure"]
         ];
 
+        for($i = 0, $a = count($perlerColors) ; $i < $a ; $i++)
+        {
+            $color = new PerlerColors();
 
-		for($i = 0, $a = count($colors) ; $i < $a ; $i++)
-		{
-			$color = new PerlerColors();
+            $color->setName($perlerColors[$i][1])
+                  ->setHex($converter->RgbToHex($perlerColors[$i][0]))
+                  ->setBrand($brandRepo->findOneByName('Perler'))
+                  ;
 
-			$color->setName($colors[$i][0])
-				  ->setHex($colors[$i][1])
-				  ->setBrand($brandRepo->findOneByName('Various'))
-				  ;
+            $manager->persist($color);
+        }
 
-			$manager->persist($color);
-		}
 
         for($i = 0, $a = count($hamaColors) ; $i < $a ; $i++)
         {

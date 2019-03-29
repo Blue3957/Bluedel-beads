@@ -12,7 +12,7 @@
 			<div class="col-12 col-xl-8">
 				<h1 class="text-center">Grid</h1>
 				<div class="grid container" style="margin-top:20px; width:800px; padding:0;" onDragStart="return false" onSelect="return false">
-					<img src="{% if image is defined %}{{ asset('uploads/' ~ image.name) }}{% else %}https://picsum.photos/800/?random{% endif %}" alt="background-image" style="position:absolute; height: 800px; width: 800px" id="image">
+					<img src="{% if image is null %}https://picsum.photos/800/?random{% else %}{{ asset('uploads/' ~ image.name) }}{% endif %}" alt="background-image" style="position:absolute; height: 800px; width: 800px" id="image">
 					{% for i in 1..32 %}
 						<div class="row d-flex justify-content-center">
 
@@ -21,8 +21,6 @@
 								<div class="square x{{i}} y{{j}}"
 									 style="z-index:1; height:25px; width:25px; border:1px solid grey; background-color:#FFFFFF00;"
 									 onclick="changeColor({{i}}, {{j}})"
-									 onmousedown="beginLine({{i}}, {{j}})"
-									 onmouseup="endLine({{i}}, {{j}})"
 								>
 								</div>
 
@@ -61,6 +59,7 @@
 				<div class="d-flex justify-content-center row">
 					<button class="btn btn-primary" id="eraserButton" onclick="changeCurrentColor('#FFFFFF00')">Eraser</button>
 					<button class="btn btn-outline-primary" id="lineButton" onclick="toggleLineTool()">Line</button>
+					<button class="btn btn-outline-primary" id="rectangleButton" onclick="toggleRectangleTool()">Rectangle</button>
 				</div>
 
 
