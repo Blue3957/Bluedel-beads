@@ -180,7 +180,7 @@ function beginRectangle(x, y){
 function endRectangle(x, y){
 	var xStart = Math.min(rectangleStart[0], x);
 	var xEnd = Math.max(rectangleStart[0], x);
-	for(var i = xStart ; i < xEnd ; i++){
+	for(var i = xStart ; i <= xEnd ; i++){
 		beginLine(i, rectangleStart[1]);
 		endLine(i, y);
 	}
