@@ -75,7 +75,7 @@ class PerlerController extends AbstractController
 
    	/**
    	 * @Route("/perler/pattern", name="perler_pattern")
-     * @Route("/perler/pattern/{id<\d+>}", name="perler_pattern_image")
+     * @Route("/perler/pattern/{slug}{id}", name="perler_pattern_image")
    	 */
    	public function Pattern(PaletteRepository $paletteRepo, PerlerBrandsRepository $brandsRepo, PatternImage $image = null)
    	{
@@ -86,6 +86,7 @@ class PerlerController extends AbstractController
       if(isset($_POST['webimage']))
       {
         $webimage = $_POST['webimage'];
+        $image = null;
       }
       dump($_POST);
 
@@ -118,7 +119,7 @@ class PerlerController extends AbstractController
         $manager->persist($image);
         $manager->flush();
 
-        return $this->redirectToRoute('perler_pattern_image', ['id' => $image->getId()]);
+        return $this->redirectToRoute('perler_pattern_image', ['slug' => $image->getSlug(), 'id' => $image->getId()]);
       }
 
       return $this->render('perler/imageUpload.html.twig', [

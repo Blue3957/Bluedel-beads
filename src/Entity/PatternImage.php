@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,5 +54,10 @@ class PatternImage
         $this->created_at = $created_at;
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+       return (new Slugify())->slugify(substr($this->name, 0, -4));
     }
 }
