@@ -82,11 +82,18 @@ class PerlerController extends AbstractController
    		$palette = $paletteRepo->findOneByName('Full Palette');
       dump($palette);
    		$brands = $brandsRepo->findAll();
+      $webimage = "";
+      if(isset($_POST['webimage']))
+      {
+        $webimage = $_POST['webimage'];
+      }
+      dump($_POST);
 
    		return $this->render("perler/pattern.html.twig", [
    			'palette' => $palette,
    			'brands' => $brands,
-        'image' => $image
+        'image' => $image,
+        'webimage' => $webimage
    		]);
    	}
 

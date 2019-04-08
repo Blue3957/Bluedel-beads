@@ -13,7 +13,16 @@
 				<h1 class="text-center">Grid</h1>
 				<div class="grid container" style="margin-top:20px; width:800px; padding:0;" onDragStart="return false" onSelect="return false">
 					<div style="position:absolute; overflow: hidden; height: 800px; width: 800px">
-						<img src="{% if image is null %}https://picsum.photos/800/?random{% else %}{{ asset('uploads/' ~ image.name) }}{% endif %}" alt="background-image" id="image" style="height: 800px; width: auto">
+						<img src="
+							{% if image is null %}
+								{% if webimage == "" %}
+									https://picsum.photos/800/?random
+								{% else %}
+									{{ webimage }}
+								{% endif %}
+							{% else %}
+								{{ asset('uploads/' ~ image.name) }}
+							{% endif %}" alt="background-image" id="image" style="height: 800px; width: auto">
 					</div>
 					{% for i in 1..32 %}
 						<div class="row d-flex justify-content-center">
@@ -31,6 +40,12 @@
 						</div>
 					{% endfor %}
 
+				</div>
+				<div class="d-flex justify-content-center row">
+						<form action="#" method="POST" class="form-inline">
+							<input class="form-control" placeholder="Image URL..." type="text" name="webimage">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
 				</div>
 				<div class="d-flex justify-content-center row">
 						<a href="{{ path('perler_upload_image') }}" class="btn btn-primary">Upload an image</a>
