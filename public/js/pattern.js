@@ -22,7 +22,7 @@ rectangleTool = false;
 */
 function changeColor(x, y){
 	var query = ".square.x" + x + ".y" + y;
-	square = document.querySelector(query);
+	var square = document.querySelector(query);
 	square.style.backgroundColor=currentColor;
 }
 
@@ -50,6 +50,24 @@ function changeOpacity(layer, value){
 			square.style.opacity = value * 0.01;
 		});
 	}
+}
+
+function moveHorizontally(value){
+	var image = document.querySelector('#image');
+	var margin = image.style.marginLeft.substring(0, image.style.marginLeft.length-2);
+	console.log('original margin : ' + margin);
+	margin = parseInt(margin) + value;
+	console.log('new margin : ' + margin);
+	image.style.marginLeft = margin + "px";
+}
+
+function moveVertically(value){
+	var image = document.querySelector('#image');
+	var margin = image.style.marginTop.substring(0, image.style.marginTop.length-2);
+	console.log('original margin : ' + margin);
+	margin = parseInt(margin) + value;
+	console.log('new margin : ' + margin);
+	image.style.marginTop = margin + "px";
 }
 
 

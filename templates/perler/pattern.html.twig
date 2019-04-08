@@ -13,16 +13,16 @@
 				<h1 class="text-center">Grid</h1>
 				<div class="grid container" style="margin-top:20px; width:800px; padding:0;" onDragStart="return false" onSelect="return false">
 					<div style="position:absolute; overflow: hidden; height: 800px; width: 800px">
-						<img src="
+						<img src=
 							{% if image is null %}
 								{% if webimage == "" %}
-									https://picsum.photos/800/?random
+									"https://picsum.photos/800/?random"
 								{% else %}
-									{{ webimage }}
+									"{{ webimage }}"
 								{% endif %}
 							{% else %}
-								{{ asset('uploads/' ~ image.name) }}
-							{% endif %}" alt="background-image" id="image" style="height: 800px; width: auto">
+								"{{ asset('uploads/' ~ image.name) }}"
+							{% endif %} alt="background-image" id="image" style="height: 800px; width: auto; margin-left: 0; margin-top: 0">
 					</div>
 					{% for i in 1..32 %}
 						<div class="row d-flex justify-content-center">
@@ -75,6 +75,12 @@
 
 					</div>
 
+				<h1 class="text-center">Current color</h1>
+				<div class="d-flex justify-content-center row">
+					<img src="{{ asset("resources/transparent.png") }}" alt="background-image" style="height: 50px; width; 50px; position:absolute;">
+					<div class="currentColor" style="z-index: 1; height:50px; width:50px; background-color:#000000; border: 1px solid black;"></div>
+				</div>
+
 				<h1 class=text-center>Tools</h1>
 				<div class="d-flex justify-content-center row">
 					<button class="btn btn-primary" id="eraserButton" onclick="changeCurrentColor('#FFFFFF00')">Eraser</button>
@@ -82,12 +88,6 @@
 					<button class="btn btn-outline-primary" id="rectangleButton" onclick="toggleRectangleTool()">Rectangle</button>
 				</div>
 
-
-				<h1 class="text-center">Current color</h1>
-				<div class="d-flex justify-content-center row">
-					<img src="{{ asset("resources/transparent.png") }}" alt="background-image" style="height: 50px; width; 50px; position:absolute;">
-					<div class="currentColor" style="z-index: 1; height:50px; width:50px; background-color:#000000; border: 1px solid black;"></div>
-				</div>
 				<h1 class="text-center">Opacity</h1>
 				<div class="d-flex justify-content-center row col-6 offset-3" id="opacity">
 					<label for="foreground">Foreground</label>
@@ -95,6 +95,20 @@
 					<label for="background">Background</label>
 					<input type="range" value="100" class="custom-range" id="background" oninput="changeOpacity('background', this.value)">
 				</div>
+
+				<h1 class="text-center">Move the image</h1>
+				<div class="d-flex justify-content-center row moveButtons">
+					<button class="btn btn-secondary" onclick="moveVertically(-10)"><i class="fas fa-arrow-up"></i></button>
+				</div>
+				<div class="d-flex justify-content-center row moveButtons">
+					<button class="btn btn-secondary" onclick="moveHorizontally(-10)"><i class="fas fa-arrow-left"></i></button>
+					<button class="btn btn-secondary" disabled>o</button>
+					<button class="btn btn-secondary" onclick="moveHorizontally(10)"><i class="fas fa-arrow-right"></i></button>
+				</div>
+				<div class="d-flex justify-content-center row moveButtons">
+					<button class="btn btn-secondary" onclick="moveVertically(10)"><i class="fas fa-arrow-down"></i></button>
+				</div>
+
 			</div>
 		</div>
 	</div>
