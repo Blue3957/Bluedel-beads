@@ -97,16 +97,22 @@
 				</div>
 
 				<h1 class="text-center">Move the image</h1>
-				<div class="d-flex justify-content-center row moveButtons">
-					<button class="btn btn-secondary" onclick="moveVertically(-10)"><i class="fas fa-arrow-up"></i></button>
-				</div>
-				<div class="d-flex justify-content-center row moveButtons">
-					<button class="btn btn-secondary" onclick="moveHorizontally(-10)"><i class="fas fa-arrow-left"></i></button>
-					<button class="btn btn-secondary" disabled>o</button>
-					<button class="btn btn-secondary" onclick="moveHorizontally(10)"><i class="fas fa-arrow-right"></i></button>
-				</div>
-				<div class="d-flex justify-content-center row moveButtons">
-					<button class="btn btn-secondary" onclick="moveVertically(10)"><i class="fas fa-arrow-down"></i></button>
+				<div>
+					<div class="d-flex justify-content-center row moveButtons">
+						<button class="btn btn-secondary" onclick="moveVertically(-10)"><i class="fas fa-arrow-up"></i></button>
+					</div>
+					<div class="d-flex justify-content-center row moveButtons">
+						<button class="btn btn-secondary" onclick="moveHorizontally(-10)"><i class="fas fa-arrow-left"></i></button>
+						<button class="btn btn-secondary" disabled>o</button>
+						<button class="btn btn-secondary" onclick="moveHorizontally(10)"><i class="fas fa-arrow-right"></i></button>
+					</div>
+					<div class="d-flex justify-content-center row moveButtons">
+						<button class="btn btn-secondary" onclick="moveVertically(10)"><i class="fas fa-arrow-down"></i></button>
+					</div>
+					<h2 class="text-center">Zoom</h2>
+					<div class="d-flex justify-content-center row col-6 offset-3" id="opacity">
+						<input type="range" min="100" max="300" value="100" class="custom-range" oninput="zoom(this.value)">
+					</div>
 				</div>
 
 			</div>

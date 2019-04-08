@@ -55,19 +55,19 @@ function changeOpacity(layer, value){
 function moveHorizontally(value){
 	var image = document.querySelector('#image');
 	var margin = image.style.marginLeft.substring(0, image.style.marginLeft.length-2);
-	console.log('original margin : ' + margin);
 	margin = parseInt(margin) + value;
-	console.log('new margin : ' + margin);
 	image.style.marginLeft = margin + "px";
 }
 
 function moveVertically(value){
 	var image = document.querySelector('#image');
 	var margin = image.style.marginTop.substring(0, image.style.marginTop.length-2);
-	console.log('original margin : ' + margin);
 	margin = parseInt(margin) + value;
-	console.log('new margin : ' + margin);
 	image.style.marginTop = margin + "px";
+}
+
+function zoom(value){
+	document.querySelector('#image').style.height = (value * 8) + "px";
 }
 
 
