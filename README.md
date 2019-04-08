@@ -4,6 +4,7 @@
 
 ## Preparation
 * Before everything else, check that you have a proper installation of PHP, PHPMyAdmin or similar, as well as Composer on your computer
+* Check that your MySQL server is running
 * Clone the repository
 
 ## Dependencies and database
@@ -17,5 +18,6 @@
 * Run the command "doctrine:fixtures:load" (to fill the database with default values)
 
 ## Running the project
+* Make sure your MySQL is running and you can properly access your database
 * run the command "php bin/console server:run" to get the server running
 * You can now access the web app in your browser, at localhost:8000 (or another port depending on your php.ini settings)
