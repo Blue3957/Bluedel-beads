@@ -51,6 +51,7 @@ class PerlerController extends AbstractController
     		]);
     	}
 
+      dump($form->createView());
     	return $this->render('perler/editPalette.html.twig', [
     		'form' => $form->createView()
     	]);

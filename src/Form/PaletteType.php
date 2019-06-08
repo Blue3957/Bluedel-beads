@@ -19,8 +19,7 @@ class PaletteType extends AbstractType
             ->add('colors', EntityType::class, [
                 'class' => PerlerColors::class,
                 'choice_label' => 'name',
-                'multiple' => true,
-                'expanded' => true
+                'multiple' => true
                 ])
         ;
     }

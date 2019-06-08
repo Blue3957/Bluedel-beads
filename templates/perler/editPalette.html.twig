@@ -3,10 +3,17 @@
 {% block title %}Hello PerlerPaletteController!{% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container"
+		{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
 		{{ form_start(form) }}
 		{{ form_widget(form) }}
 		<button type="submit" class="btn btn-outline-info">Submit</button>
 		{{ form_end(form) }}
 	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		$('select').select2();
+	</script>
 {% endblock %}
